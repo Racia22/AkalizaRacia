@@ -36,8 +36,7 @@ portfolio/
 └── README.md
 ```
 
-Akaliza Racia - [Portfolio](https://your-portfolio.com)
+Akaliza Racia - [Portfolio](https://racia.netlify.app/)
 
 ---
 
-**Happy coding! Feel free to customize and deploy your portfolio.** 🚀
