@@ -111,13 +111,6 @@ export const portfolioData = {
       degree: "BSc in Software Engineering",
       year: "Expected 2026",
       details: "Final-year student. Coursework: Object-Oriented Programming, Web Security & Session Management, Database Systems (PostgreSQL), API Engineering & JSON Specifications, Software Security (VAPT, Secure SDLC, OWASP)."
-    },
-    {
-      id: 2,
-      institution: "Ecole Secondaire Stella Matutina",
-      degree: "Secondary Diploma",
-      year: "2022",
-      details: "Mathematics, Computer Science and Economics (MCE)."
     }
   ],
 
