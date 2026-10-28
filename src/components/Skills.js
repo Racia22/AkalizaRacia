@@ -3,25 +3,24 @@ import '../styles/Skills.css';
 import { portfolioData } from '../data/portfolioData';
 
 function Skills() {
-  const skillsArray = [
-    { category: 'Frontend', skills: portfolioData.skills?.frontend || [] },
-    { category: 'Backend', skills: portfolioData.skills?.backend || [] },
-    { category: 'Tools & Platforms', skills: portfolioData.skills?.tools || [] },
-    { category: 'Other Skills', skills: portfolioData.skills?.other || [] }
-  ];
-
   return (
     <section id="skills" className="skills">
       <div className="container">
-        <h2>Skills & Technologies</h2>
-        
+        <div className="section-heading reveal">
+          <span className="eyebrow">Skills</span>
+          <h2>Tools I work with</h2>
+        </div>
+
         <div className="skills-grid">
-          {skillsArray.map((skillGroup, index) => (
-            <div key={index} className="skill-category">
-              <h3>{skillGroup.category}</h3>
+          {portfolioData.skills.map(group => (
+            <div key={group.category} className="skill-category reveal">
+              <div className="skill-header">
+                <i className={group.icon}></i>
+                <h3>{group.category}</h3>
+              </div>
               <div className="skill-items">
-                {skillGroup.skills.map((skill, idx) => (
-                  <span key={idx} className="skill-badge">{skill}</span>
+                {group.items.map(skill => (
+                  <span key={skill} className="skill-badge">{skill}</span>
                 ))}
               </div>
             </div>
