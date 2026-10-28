@@ -9,6 +9,7 @@ function Contact() {
     subject: '',
     message: ''
   });
+  const [sent, setSent] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,93 +19,90 @@ function Contact() {
     }));
   };
 
+  // No backend: open the visitor's mail client with the message pre-filled
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
+    const body = `${formData.message}\n\n— ${formData.name} (${formData.email})`;
+    window.location.href =
+      `mailto:${portfolioData.email}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(body)}`;
+    setSent(true);
     setFormData({ name: '', email: '', subject: '', message: '' });
-    alert('Thank you for your message! I will get back to you soon.');
   };
 
   return (
     <section id="contact" className="contact">
       <div className="container">
-        <h2>Get In Touch</h2>
-        <p className="section-subtitle">Feel free to reach out to me for any opportunities or collaborations</p>
-        
+        <div className="section-heading reveal">
+          <span className="eyebrow">Contact</span>
+          <h2>Let's work together</h2>
+          <p className="section-subtitle">
+            I'm open to junior and graduate roles, internships and freelance projects. Reach out any time.
+          </p>
+        </div>
+
         <div className="contact-wrapper">
-          <div className="contact-info">
-            <div className="contact-item">
+          <div className="contact-info reveal">
+            <a className="contact-item" href={`mailto:${portfolioData.email}`}>
               <i className="fas fa-envelope"></i>
               <div>
                 <h3>Email</h3>
-                <a href={`mailto:${portfolioData.email}`}>{portfolioData.email}</a>
+                <p>{portfolioData.email}</p>
               </div>
-            </div>
-            
-            <div className="contact-item">
+            </a>
+
+            <a className="contact-item" href={`tel:${portfolioData.phone.replace(/\s/g, '')}`}>
               <i className="fas fa-phone"></i>
               <div>
                 <h3>Phone</h3>
-                <a href={`tel:${portfolioData.phone}`}>{portfolioData.phone}</a>
+                <p>{portfolioData.phone}</p>
               </div>
-            </div>
-            
+            </a>
+
             <div className="contact-item">
-              <i className="fas fa-map-marker-alt"></i>
+              <i className="fas fa-location-dot"></i>
               <div>
                 <h3>Location</h3>
                 <p>{portfolioData.location}</p>
               </div>
             </div>
+
+            <a className="contact-item" href={portfolioData.social.linkedin} target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-linkedin-in"></i>
+              <div>
+                <h3>LinkedIn</h3>
+                <p>Connect with me</p>
+              </div>
+            </a>
           </div>
 
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
+          <form className="contact-form reveal" onSubmit={handleSubmit}>
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input id="name" type="text" name="name" value={formData.name} onChange={handleChange} required />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input id="email" type="email" name="email" value={formData.email} onChange={handleChange} required />
+              </div>
             </div>
-            
+
             <div className="form-group">
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
+              <label htmlFor="subject">Subject</label>
+              <input id="subject" type="text" name="subject" value={formData.subject} onChange={handleChange} required />
             </div>
-            
+
             <div className="form-group">
-              <input
-                type="text"
-                name="subject"
-                placeholder="Subject"
-                value={formData.subject}
-                onChange={handleChange}
-                required
-              />
+              <label htmlFor="message">Message</label>
+              <textarea id="message" name="message" rows="5" value={formData.message} onChange={handleChange} required></textarea>
             </div>
-            
-            <div className="form-group">
-              <textarea
-                name="message"
-                placeholder="Your Message"
-                rows="5"
-                value={formData.message}
-                onChange={handleChange}
-                required
-              ></textarea>
-            </div>
-            
-            <button type="submit" className="btn btn-primary">Send Message</button>
+
+            <button type="submit" className="btn btn-primary">
+              Send Message <i className="fas fa-paper-plane"></i>
+            </button>
+            {sent && (
+              <p className="form-note">Your email app should open with the message ready to send.</p>
+            )}
           </form>
         </div>
       </div>
