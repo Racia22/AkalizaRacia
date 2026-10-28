@@ -6,17 +6,19 @@ function Education() {
   return (
     <section id="education" className="education">
       <div className="container">
-        <h2>Education</h2>
-        
+        <div className="section-heading reveal">
+          <span className="eyebrow">Education</span>
+          <h2>Academic background</h2>
+        </div>
+
         <div className="education-timeline">
-          {portfolioData.education.map((edu, index) => (
-            <div key={edu.id} className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
+          {portfolioData.education.map(edu => (
+            <div key={edu.id} className="timeline-item reveal">
               <div className="timeline-marker"></div>
               <div className="timeline-content">
+                <span className="year">{edu.year}</span>
                 <h3>{edu.degree}</h3>
                 <p className="institution">{edu.institution}</p>
-                <p className="field">{edu.field}</p>
-                <p className="year">{edu.year}</p>
                 <p className="details">{edu.details}</p>
               </div>
             </div>
