@@ -6,29 +6,56 @@ function Projects() {
   return (
     <section id="projects" className="projects">
       <div className="container">
-        <h2>Featured Projects</h2>
-        
+        <div className="section-heading reveal">
+          <span className="eyebrow">Projects</span>
+          <h2>Selected work</h2>
+        </div>
+
         <div className="projects-grid">
-          {portfolioData.projects?.map((project) => (
-            <div key={project.id} className="project-card">
+          {portfolioData.projects.map(project => (
+            <article
+              key={project.id}
+              className={`project-card reveal ${project.featured ? 'featured' : ''}`}
+            >
               <div className="project-image">
-                <img src={project.image} alt={project.title} />
-                <div className="project-overlay">
-                  <a href={project.link} className="project-link">View Project</a>
-                </div>
+                {project.image ? (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined}
+                  />
+                ) : (
+                  <div className="project-placeholder">
+                    <i className={project.icon || 'fas fa-code'}></i>
+                  </div>
+                )}
+                {project.featured && <span className="featured-badge">Capstone</span>}
               </div>
-              
+
               <div className="project-content">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                
-                <div className="project-tech">
-                  {(project.technologies || []).map((tech, idx) => (
-                    <span key={idx} className="tech-tag">{tech}</span>
+                <div className="project-header">
+                  <div>
+                    <h3>{project.title}</h3>
+                    <p className="project-subtitle">{project.subtitle}</p>
+                  </div>
+                  {project.year && <span className="project-year">{project.year}</span>}
+                </div>
+
+                <p className="project-description">{project.description}</p>
+
+                <div className="tag-list">
+                  {project.technologies.map(tech => (
+                    <span key={tech} className="tag">{tech}</span>
                   ))}
                 </div>
+
+                {project.link && (
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
+                    <i className="fab fa-github"></i> View code
+                  </a>
+                )}
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>
