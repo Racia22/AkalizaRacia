@@ -6,42 +6,37 @@ function About() {
   return (
     <section id="about" className="about">
       <div className="container">
-        <h2>About Me</h2>
-        
+        <div className="section-heading reveal">
+          <span className="eyebrow">About me</span>
+          <h2>Building software end-to-end</h2>
+        </div>
+
         <div className="about-content">
-          <div className="about-text">
-            <p>
-              I'm a passionate full-stack developer with a strong foundation in both 
-              frontend and backend technologies. With a keen eye for detail and a love for 
-              clean code, I build scalable web applications that solve real-world problems.
-            </p>
-            <p>
-              When I'm not coding, you'll find me exploring new technologies, contributing 
-              to open-source projects, or sharing my knowledge with the developer community.
-            </p>
-            
-            <div className="about-info">
-              <div className="info-item">
-                <span className="label">Email:</span>
-                <span className="value">{portfolioData.email}</span>
-              </div>
-              <div className="info-item">
-                <span className="label">Phone:</span>
-                <span className="value">{portfolioData.phone}</span>
-              </div>
-              <div className="info-item">
-                <span className="label">Location:</span>
-                <span className="value">{portfolioData.location}</span>
-              </div>
+          <div className="about-text reveal">
+            {portfolioData.about.map((paragraph, idx) => (
+              <p key={idx}>{paragraph}</p>
+            ))}
+
+            <div className="about-stats">
+              {portfolioData.stats.map(stat => (
+                <div key={stat.label} className="stat">
+                  <span className="stat-value">{stat.value}</span>
+                  <span className="stat-label">{stat.label}</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="about-image">
-            <img 
-              src="/portfolio-images/profile.jpeg" 
-              alt="Akaliza Racia" 
-              className="profile-photo"
-            />
+          <div className="about-highlights reveal">
+            {portfolioData.highlights.map(item => (
+              <div key={item.title} className="highlight-card">
+                <i className={item.icon}></i>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
